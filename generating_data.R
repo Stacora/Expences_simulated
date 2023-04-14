@@ -118,6 +118,7 @@ example_DF = data.frame(Dates = date_f,
                         KindOfMovement = earnspend,
                         Banks = bank,
                         Detination = MoneyDestination,
+                        Description = NA,
                         MonerSourceType = MonerSourceType,
                         EndCreditDay = EndCreditDay)
 
@@ -133,3 +134,5 @@ for (i in 1:nrow(example_DF)) {
 }
 
 head(example_DF)
+
+write.csv(example_DF, 'fin_sample.csv')

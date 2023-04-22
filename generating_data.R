@@ -112,7 +112,8 @@ EndCreditDay = random_selection(size = n_data,
                                             "2023-04-01"))
 
 
-example_DF = data.frame(Dates = date_f,
+example_DF = data.frame(ID = 1:length(date_f),
+                        Dates = date_f,
                         Hours = horas_f,
                         AmountMoney = money,
                         KindOfMovement = earnspend,
@@ -135,4 +136,4 @@ for (i in 1:nrow(example_DF)) {
 
 head(example_DF)
 
-write.csv(example_DF, 'fin_sample.csv')
+write.csv(example_DF, 'fin_sample.csv',row.names = F)

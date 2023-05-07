@@ -48,6 +48,15 @@ for (i in 1:length(money)) {
 
 money
 
+# Currency
+# I'll apply the same logic, but using binomial distribution.
+
+set.seed(seed)
+currency = as.factor(rbinom(n = n_data, size = 5, prob = 0.3 ))
+currency = factor(currency, labels = c('USD', 'BRL', 'PEN', 
+                                       'EUR', 'LIB', 'BTL'))%>% 
+  as.character()
+currency
 
 
 
@@ -116,11 +125,12 @@ example_DF = data.frame(ID = 1:length(date_f),
                         Dates = date_f,
                         Hours = horas_f,
                         AmountMoney = money,
-                        KindOfMovement = earnspend,
+                        Currency = currency,
+                        MovementType = earnspend,
                         Banks = bank,
                         Detination = MoneyDestination,
                         Description = NA,
-                        MonerSourceType = MonerSourceType,
+                        MeansOfPayment = MonerSourceType,
                         EndCreditDay = EndCreditDay)
 
 head(example_DF)
@@ -129,7 +139,7 @@ head(example_DF)
 ## Final Data Treatment
 
 for (i in 1:nrow(example_DF)) {
-  if(example_DF[i, 'MonerSourceType'] != 'Credit'){
+  if(example_DF[i, 'MeansOfPayment'] != 'Credit'){
     example_DF[i, 'EndCreditDay'] = NA
   }
 }
@@ -137,3 +147,4 @@ for (i in 1:nrow(example_DF)) {
 head(example_DF)
 
 write.csv(example_DF, 'fin_sample.csv',row.names = F)
+

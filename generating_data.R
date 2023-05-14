@@ -21,9 +21,10 @@ indexes = sample(1:length(datas_seq), size = n_data)
 datas_seq = datas_seq[indexes]
 
 datetime = str_split_fixed(datas_seq, pattern = ' ', n = 2)
+hours_int = str_split_fixed(datetime[, 2], pattern = ':', n = 2)[, 1]
 
 date_f = datetime[, 1]
-horas_f = datetime[, 2]
+horas_f = str_split_fixed(datetime[, 2], pattern = ':', n = 2)[, 1]
 
 
 
@@ -66,7 +67,7 @@ currency
 
 set.seed(seed)
 earnspend = as.factor(rbinom(n = n_data, size = 2, prob = 0.3 ))
-earnspend = factor(earnspend, labels = c('Spend', "Moved", 'Earned'))%>% 
+earnspend = factor(earnspend, labels = c('Spend', "Move", 'Earn'))%>% 
   as.character()
 earnspend
 
@@ -121,8 +122,7 @@ EndCreditDay = random_selection(size = n_data,
                                             "2023-04-01"))
 
 
-example_DF = data.frame(ID = 1:length(date_f),
-                        Dates = date_f,
+example_DF = data.frame(Dates = date_f,
                         Hours = horas_f,
                         AmountMoney = money,
                         Currency = currency,
@@ -148,3 +148,5 @@ head(example_DF)
 
 write.csv(example_DF, 'fin_sample.csv',row.names = F)
 
+
+##### second sheet
